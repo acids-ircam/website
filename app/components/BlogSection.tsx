@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
-import GlitchText from "@/components/GlitchText"
+import GlitchText from "../../components/GlitchText"
 
 interface BlogPost {
   slug: string
