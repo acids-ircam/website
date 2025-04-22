@@ -1,0 +1,553 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 72.2% 50.6%;
+    --primary-foreground: 0 85.7% 97.3%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 72.2% 50.6%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 72.2% 50.6%;
+    --primary-foreground: 0 85.7% 97.3%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 72.2% 50.6%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-space-mono);
+  }
+}
+
+/* Add more intense RGB glitch animation */
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0
+      rgba(0, 0, 255, 0.75);
+  }
+}
+
+.glitch {
+  position: relative;
+  animation: glitch 3s infinite;
+  animation-play-state: running;
+}
+
+.glitch:hover {
+  animation-play-state: running;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #dc2626;
+  color: transparent;
+}
+
+.waveform-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.waveform-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0) 80%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Enhanced RGB glitch effect for section titles */
+.section-title-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.section-title-glitch::before,
+.section-title-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.section-title-glitch::before {
+  color: #ff0000;
+  z-index: -1;
+  animation: glitch-channel 3s infinite alternate-reverse;
+}
+
+.section-title-glitch::after {
+  color: #00ffff;
+  z-index: -2;
+  animation: glitch-channel 2s infinite alternate-reverse;
+}
+
+@keyframes glitch-channel {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-3px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(3px, 1px);
+  }
+  80% {
+    transform: translate(2px, -1px);
+  }
+}
+
+.art-button {
+  @apply px-6 py-3 bg-transparent border border-red-600 text-white font-mono uppercase tracking-wider transition-all duration-300;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.art-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #dc2626;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.art-button:hover::before {
+  width: 100%;
+}
+
+.project-section {
+  @apply py-24 px-4 sm:px-6 lg:px-8 bg-black relative overflow-hidden;
+}
+
+.project-container {
+  @apply container mx-auto grid md:grid-cols-2 gap-12 items-center;
+}
+
+.project-image {
+  @apply overflow-hidden shadow-2xl relative;
+}
+
+.project-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(220, 38, 38, 0.2), transparent);
+  mix-blend-mode: overlay;
+}
+
+.project-content {
+  @apply space-y-6;
+}
+
+.project-title {
+  @apply text-3xl font-bold text-white font-mono;
+  letter-spacing: -1px;
+}
+
+.project-description {
+  @apply text-gray-300 font-mono;
+}
+
+.project-link {
+  @apply text-red-500 hover:text-red-400 inline-flex items-center font-mono uppercase tracking-wider;
+}
+
+.video-carousel {
+  @apply py-16 bg-black;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, #dc2626, #ef4444, #f87171);
+}
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.elegant-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.elegant-hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.elegant-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.subtle-animation {
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.subtle-animation:hover {
+  transform: translateY(-2px);
+}
+
+.elegant-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.elegant-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.elegant-card:hover {
+  transform: translateY(-5px);
+}
+
+.elegant-card:hover::before {
+  opacity: 1;
+}
+
+.elegant-border {
+  position: relative;
+}
+
+.elegant-border::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(1.1);
+}
+
+.elegant-border:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Add new styles for the landing page */
+.pt-screen {
+  padding-top: 100vh;
+}
+
+/* Add glitch animation for the orb */
+@keyframes orb-glitch {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  5% {
+    clip-path: inset(0.8em 0 0.4em 0);
+  }
+  10% {
+    clip-path: inset(0 0 0 0);
+  }
+  15% {
+    clip-path: inset(0.2em 0 0.6em 0);
+  }
+  20% {
+    clip-path: inset(0 0 0 0);
+  }
+  25% {
+    clip-path: inset(0.3em 0 0.3em 0);
+  }
+  30% {
+    clip-path: inset(0 0 0 0);
+  }
+  45% {
+    clip-path: inset(0.7em 0 0.1em 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  55% {
+    clip-path: inset(0.4em 0 0.8em 0);
+  }
+  60% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Adjust the orb glow animation to be slower */
+.orb-glow {
+  filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.7));
+  transition: all 0.5s ease-in-out;
+  position: relative;
+}
+
+.orb-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 50px rgba(220, 38, 38, 0.7), inset 0 0 50px rgba(220, 38, 38, 0.5);
+  animation: orb-glitch 15s infinite steps(1); /* Increased from 10s to 15s for slower glitch */
+  opacity: 0.25; /* Reduced from 0.3 for more subtlety */
+  z-index: -1;
+}
+
+/* RGB split effect for glitchy elements */
+.rgb-split {
+  position: relative;
+  overflow: visible;
+}
+
+.rgb-split::before,
+.rgb-split::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.rgb-split::before {
+  color: #ff0000;
+  transform: translate(-3px, 0);
+}
+
+.rgb-split::after {
+  color: #00ffff;
+  transform: translate(3px, 0);
+}
+
+/* Glitchy particle animation */
+@keyframes particle-glitch {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5px, 3px);
+  }
+  20% {
+    transform: translate(0, 0);
+  }
+  30% {
+    transform: translate(5px, -3px);
+  }
+  40% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.particle-glitch {
+  animation: particle-glitch 0.5s steps(2) infinite;
+  animation-play-state: paused;
+}
+
+.particle-glitch:hover {
+  animation-play-state: running;
+}
+
+/* Particle effects */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.particle-trail {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Adjust the pulse animation to be slower */
+@keyframes pulse {
+  0% {
+    opacity: 0.08; /* Reduced from 0.1 */
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 0.25; /* Reduced from 0.3 */
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.08; /* Reduced from 0.1 */
+    transform: scale(0.97);
+  }
+}
+
+/* Improved halftone pattern */
+.halftone-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at center, rgba(220, 38, 38, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  animation: halftone-drift 60s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes halftone-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
+
+/* Wave animation */
+@keyframes wave-out {
+  0% {
+    transform: scale(0);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.wave-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  pointer-events: none;
+}
